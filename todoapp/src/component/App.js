@@ -20,8 +20,8 @@ class App extends Component {
       { id: 4, text: "sprzedać butelki po piwie (20 skrzynek)", date: '2020-11-12', important: false, active: true, finishDate: null },
       { id: 5, text: "jeszcze raz pomalować dom", date: '2019-09-11', important: false, active: true, finishDate: null },
       { id: 6, text: "fryzjer!!!", date: '2019-05-20', important: true, active: true, finishDate: null },
-      { id: 7, text: "nie odbierać poleconego od komornika", date: '2020-11-12', important: false, active: true, finishDate: null },
-      { id: 8, text: "kupić 2 butelki litrowe", date: '2019-09-11', important: false, active: true, finishDate: null },
+      { id: 7, text: "nie odbierać poleconego od komornika", date: '2020-11-12', important: false, active: false, finishDate: null },
+      { id: 8, text: "kupić 2 butelki litrowe", date: '2019-09-11', important: false, active: false, finishDate: null },
 
     ]
   }
@@ -50,6 +50,7 @@ class App extends Component {
     tasks.forEach(task => {
       if (task.id === id) {
         task.active = false;
+        task.finishDate = new Date().getTime()
       }
     })
     this.setState({
@@ -62,7 +63,7 @@ class App extends Component {
       <div className="App">
         TO DO APP
         <AddTask />
-        <TaskList task={this.state.tasks} delete={this.deleteTask} change={this.changeTaskStatus} />
+        <TaskList tasks={this.state.tasks} delete={this.deleteTask} change={this.changeTaskStatus} />
       </div>
     );
   }
