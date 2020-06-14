@@ -4,6 +4,7 @@ import TaskList from './TaskList'
 import './App.css';
 
 class App extends Component {
+  counter = 9
   state = {
     tasks: [
       {
@@ -20,8 +21,8 @@ class App extends Component {
       { id: 4, text: "sprzedać butelki po piwie (20 skrzynek)", date: '2020-11-12', important: false, active: true, finishDate: null },
       { id: 5, text: "jeszcze raz pomalować dom", date: '2019-09-11', important: false, active: true, finishDate: null },
       { id: 6, text: "fryzjer!!!", date: '2019-05-20', important: true, active: true, finishDate: null },
-      { id: 7, text: "nie odbierać poleconego od komornika", date: '2020-11-12', important: false, active: false, finishDate: null },
-      { id: 8, text: "kupić 2 butelki litrowe", date: '2019-09-11', important: false, active: false, finishDate: null },
+      { id: 7, text: "nie odbierać poleconego od komornika", date: '2020-11-12', important: false, active: true, finishDate: null },
+      { id: 8, text: "kupić 2 butelki litrowe", date: '2019-09-11', important: false, active: true, finishDate: null },
 
     ]
   }
@@ -58,11 +59,32 @@ class App extends Component {
     })
   }
 
+  addTask = (text, date, important) => {
+    // console.log("dodany obiekt");
+
+    const task = {
+      id: this.counter,
+      text, // text z inputa
+      date, // text z input
+      important, //wartość z inputa
+      active: true,
+      finishDate: null
+    }
+    this.counter++
+    console.log(task, this.counter);
+
+    this.setState(prevState => ({
+      tasks: [...prevState.tasks, task]
+    }))
+
+    return true;
+  }
+
   render() {
     return (
       <div className="App">
-        TO DO APP
-        <AddTask />
+        <h1>TODO APP</h1>
+        <AddTask add={this.addTask} />
         <TaskList tasks={this.state.tasks} delete={this.deleteTask} change={this.changeTaskStatus} />
       </div>
     );
